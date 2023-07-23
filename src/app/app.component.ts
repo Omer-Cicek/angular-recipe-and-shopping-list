@@ -7,11 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-recipe-and-shopping-list';
-
-  loadedFeature = 'recipe';
-
-  onNavigate(feature: string) {
-    console.log(feature);
-    this.loadedFeature = feature;
-  }
 }
