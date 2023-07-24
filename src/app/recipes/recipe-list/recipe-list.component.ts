@@ -17,6 +17,9 @@ export class RecipeListComponent {
   recipes: Recipe[] = this.recipeService.getRecipes();
 
   onNewRecipe() {
+    this.recipeService.recipeChanged.subscribe((recipes: Recipe[]) => {
+      this.recipes = recipes;
+    });
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 }
