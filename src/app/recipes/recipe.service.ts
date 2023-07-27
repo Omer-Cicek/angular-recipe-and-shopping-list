@@ -7,20 +7,22 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class RecipeService {
   recipeChanged = new Subject<Recipe[]>();
-  private recipes: Recipe[] = [
-    new Recipe(
-      'A test Recipe',
-      'This is simply a test',
-      'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_1280.jpg',
-      [new Ingredients('Meat', 1), new Ingredients('French Fries', 20)]
-    ),
-    new Recipe(
-      'A test Recipe',
-      'This is simply a test',
-      'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_1280.jpg',
-      [new Ingredients('Buns', 2), new Ingredients('Meat', 1)]
-    ),
-  ];
+  //   private recipes: Recipe[] = [
+  //     new Recipe(
+  //       'A test Recipe',
+  //       'This is simply a test',
+  //       'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_1280.jpg',
+  //       [new Ingredients('Meat', 1), new Ingredients('French Fries', 20)]
+  //     ),
+  //     new Recipe(
+  //       'A test Recipe',
+  //       'This is simply a test',
+  //       'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_1280.jpg',
+  //       [new Ingredients('Buns', 2), new Ingredients('Meat', 1)]
+  //     ),
+  //   ];,
+
+  private recipes: Recipe[] = [];
 
   constructor(private slService: ShoppingListService) {}
 
@@ -34,6 +36,11 @@ export class RecipeService {
 
   addIngredientsToShoppingList(ingredient: Ingredients[]) {
     this.slService.addIngredient(ingredient);
+  }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipeChanged.next(this.recipes.slice());
   }
 
   addRecipe(recipe: Recipe) {
